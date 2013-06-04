@@ -35,15 +35,15 @@ $(function() {
 
         case 'seek':
             if (trackSeeking && !videoSeeking) {
-                _gaq.push(['_trackEvent', 'Vimeo', 'Skipped video forward or backward', url, undefined, true]);
-                videoSeeking = true; // Avoid subsequent seek trackings
+               dataLayer.push({'event':'GAevent', 'eventCategory':'Video', 'eventAction':'Skipped video forward or backward', 'eventLabel':'Vimeo -'+url, 'eventValue':'1', 'eventInteraction':true})
+               videoSeeking = true; // Avoid subsequent seek trackings
             }
             break;
 
         case 'play':
             if (!videoPlayed) {
-                _gaq.push(['_trackEvent', 'Vimeo', 'Started video', url, undefined, true]);             
-                videoPlayed = true; //  Avoid subsequent play trackings
+               dataLayer.push({'event':'GAevent', 'eventCategory':'Video', 'eventAction':'Started video', 'eventLabel':'Vimeo -'+url, 'eventValue':'1', 'eventInteraction':true})
+               videoPlayed = true; // Avoid subsequent seek trackings
             }
             break;
 
@@ -53,8 +53,8 @@ $(function() {
 
         case 'finish':
             if (!videoCompleted) {
-                _gaq.push(['_trackEvent', 'Vimeo', 'Completed video', url, undefined, true]);
-                videoCompleted = true; // Avoid subsequent finish trackings
+              dataLayer.push({'event':'GAevent', 'eventCategory':'Video', 'eventAction':'Completed video', 'eventLabel':'Vimeo -'+url, 'eventValue':'1', 'eventInteraction':true})
+               videoCompleted = true; // Avoid subsequent seek trackings
             }
             break;
         }
@@ -90,8 +90,9 @@ $(function() {
     
     function onPause() {
      if (timePercentComplete < 99 && !videoPaused) {
-      _gaq.push(['_trackEvent', 'Vimeo', 'Paused video', url, undefined, true]);
-      videoPaused = true; // Avoid subsequent pause trackings
+      
+       dataLayer.push({'event':'GAevent', 'eventCategory':'Video', 'eventAction':'Paused videoo', 'eventLabel':'Vimeo -'+url, 'eventValue':'1', 'eventInteraction':true})
+       videoPaused = true; // Avoid subsequent seek trackings
       }
      }
 
