@@ -4,6 +4,32 @@ Tracking Vimeo Player Events with Google Analytics.
 ## Usage
 Include the scripts in the body section of the HTML document, just before the `</body>` tag. You’ll need to be running on a web server instead of opening the file directly in your browser. Flash and JS security restrictions will prevent the API from working when run locally.
 
+## Configuration of the Google Tag Manager
+For this alternative version of vimeo.ga.js (vimeo.gtm.js) we will use the full power of the Google Tag Manager.
+This means we will use an standard way of event tracking using macro's and datalayer events.
+
+### Creating the essential Macro's
+A macro in GTM is just a place where you can store values that we can access later on (wihtin tags and rules).
+From within a macro we can capture and store values coming from different sources: cookies, referrer, URL, the GTM dataLayer and so on. 
+The best description for macro's I've came across is that Macro's are the pipes connecting what happened on your website with your tracking management logic.
+We will use this Macro functionality to push our Vimeo events (but infact it will work for all events) to Google Analytics or Universal Analytics.
+
+Go ahead and create five macros (a macro for each of Google Analytics event parameters). 
+The naming of the Macro's and standard rule we will setup makes it possible to reuse the same macros to track every type of GA event data, so after this your all set for the future. 
+
+__Macro Name:__ Event Category -> Data Layer Variable: _eventCategory_
+__Macro Name:__ Event Action -> Data Layer Variable: _eventAction_
+__Macro Name:__ Event Label -> Data Layer Variable: _eventLabel_
+__Macro Name:__ Event Value -> Data Layer Variable: _eventValue_
+__Macro Name:__ Event Interaction -> Data Layer Variable: _eventInteraction_
+
+### Creating the event tag
+We now can make our Google Analytics event. new Google Analytics tag, but this time we well choose "event" as "Track Type". 
+The GTM interface will give you a nice set of input boxes. In each input box, which map to a Google Analytics event parameter, click on "macro" ad select the corresponding macro you have just created. 
+
+### Add the proper rule
+Now create and add a rule (event: GAevent) to fire the Google Analytics event tag.
+
 ### Basic
 ```html
 <iframe src="http://player.vimeo.com/video/22439234?api=1" width="640" height="390" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
